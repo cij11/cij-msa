@@ -1,12 +1,7 @@
 var textInput : string;
 
 $(document).ready(function(){
-$("#cityPara").hide();
-$("#tempPara").hide();
-$("#pressurePara").hide();
-$("#humidityPara").hide();
-$("#windSpeedPara").hide();
-$("#windDirectionPara").hide();
+    sendAjaxWeatherRequestIP()
 });
 
 class WeatherReport{
@@ -16,13 +11,6 @@ class WeatherReport{
         this.cascadeDelay = 300;    
     }
     updateInformationPanel(){
-        $("#cityPara").hide();
-        $("#tempPara").hide();
-        $("#pressurePara").hide();
-        $("#humidityPara").hide();
-        $("#windSpeedPara").hide();
-        $("#windDirectionPara").hide();
-
         $("#cityPara").text("City: " + this.city);
         $("#tempPara").text("Temperature: " + this.temp + " C");
         $("#pressurePara").text("Pressure: " + this.pressure + " mb");
@@ -37,6 +25,20 @@ class WeatherReport{
         $("#windSpeedPara").delay(this.cascadeDelay * 4).fadeIn();
         $("#windDirectionPara").delay(this.cascadeDelay * 5).fadeIn();
     }
+}
+
+function startLoading(){
+    $("#cityPara").hide();
+    $("#tempPara").hide();
+    $("#pressurePara").hide();
+    $("#humidityPara").hide();
+    $("#windSpeedPara").hide();
+    $("#windDirectionPara").hide();
+    $('.spin').spin('show');
+}
+
+function stopLoading(){
+    $('.spin').spin('hide');
 }
 
 $("#button1").on("click", function(){
@@ -84,6 +86,7 @@ function sendAjaxWeatherRequestByCountryCity(country : String, city : String){
   var wind_direction = parsed_json['current_observation']['wind_dir'];
 
   var weatherReport = new WeatherReport(city, temp_c, pressure_mb, humidity_percent, windspeed_kph, wind_direction);
+  stopLoading();
   weatherReport.updateInformationPanel();
 
  // alert("Current temperature in " + country + " is: " + temp_c);
@@ -92,6 +95,7 @@ function sendAjaxWeatherRequestByCountryCity(country : String, city : String){
 }
 
 function sendAjaxWeatherRequestIP(){
+    startLoading();
     $.ajax({
   url : "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/q/autoip.json",
   dataType : "jsonp",

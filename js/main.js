@@ -1,11 +1,6 @@
 var textInput;
 $(document).ready(function () {
-    $("#cityPara").hide();
-    $("#tempPara").hide();
-    $("#pressurePara").hide();
-    $("#humidityPara").hide();
-    $("#windSpeedPara").hide();
-    $("#windDirectionPara").hide();
+    sendAjaxWeatherRequestIP();
 });
 var WeatherReport = (function () {
     function WeatherReport(city, temp, pressure, humidity, speed, direction) {
@@ -18,12 +13,6 @@ var WeatherReport = (function () {
         this.cascadeDelay = 300;
     }
     WeatherReport.prototype.updateInformationPanel = function () {
-        $("#cityPara").hide();
-        $("#tempPara").hide();
-        $("#pressurePara").hide();
-        $("#humidityPara").hide();
-        $("#windSpeedPara").hide();
-        $("#windDirectionPara").hide();
         $("#cityPara").text("City: " + this.city);
         $("#tempPara").text("Temperature: " + this.temp + " C");
         $("#pressurePara").text("Pressure: " + this.pressure + " mb");
@@ -39,6 +28,18 @@ var WeatherReport = (function () {
     };
     return WeatherReport;
 }());
+function startLoading() {
+    $("#cityPara").hide();
+    $("#tempPara").hide();
+    $("#pressurePara").hide();
+    $("#humidityPara").hide();
+    $("#windSpeedPara").hide();
+    $("#windDirectionPara").hide();
+    $('.spin').spin('show');
+}
+function stopLoading() {
+    $('.spin').spin('hide');
+}
 $("#button1").on("click", function () {
     sendAjaxWeatherRequestIP();
 });
@@ -78,12 +79,14 @@ function sendAjaxWeatherRequestByCountryCity(country, city) {
             var windspeed_kph = parsed_json['current_observation']['wind_kph'];
             var wind_direction = parsed_json['current_observation']['wind_dir'];
             var weatherReport = new WeatherReport(city, temp_c, pressure_mb, humidity_percent, windspeed_kph, wind_direction);
+            stopLoading();
             weatherReport.updateInformationPanel();
             // alert("Current temperature in " + country + " is: " + temp_c);
         }
     });
 }
 function sendAjaxWeatherRequestIP() {
+    startLoading();
     $.ajax({
         url: "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/q/autoip.json",
         dataType: "jsonp",
