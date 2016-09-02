@@ -1,7 +1,17 @@
 var textInput : string;
 
+$("#cityPara").hide();
+$("#tempPara").hide();
+$("#pressurePara").hide();
+$("#humidityPara").hide();
+$("#windSpeedPara").hide();
+$("#windDirectionPara").hide();
+
 class WeatherReport{
+    cascadeDelay : number;
+
     constructor(public city, public temp, public pressure, public humidity, public speed, public direction ){
+        this.cascadeDelay = 20;    
     }
     updateInformationPanel(){
         $("#cityPara").text("City: " + this.city);
@@ -10,6 +20,13 @@ class WeatherReport{
         $("#humidityPara").text("Humidity: " + this.humidity);
         $("#windSpeedPara").text("Windspeed: " + this.speed + "km/h");
         $("#windDirectionPara").text("Wind direction: " + this.direction);
+
+        $("#cityPara").fadeIn();
+        $("#tempPara").fadeIn().delay(this.cascadeDelay);
+        $("#pressurePara").hide();
+        $("#humidityPara").hide();
+        $("#windSpeedPara").hide();
+        $("#windDirectionPara").hide();
     }
 }
 
