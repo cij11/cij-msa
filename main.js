@@ -1,4 +1,12 @@
 var textInput;
+$(document).ready(function () {
+    $("#cityPara").hide();
+    $("#tempPara").hide();
+    $("#pressurePara").hide();
+    $("#humidityPara").hide();
+    $("#windSpeedPara").hide();
+    $("#windDirectionPara").hide();
+});
 var WeatherReport = (function () {
     function WeatherReport(city, temp, pressure, humidity, speed, direction) {
         this.city = city;
@@ -7,14 +15,27 @@ var WeatherReport = (function () {
         this.humidity = humidity;
         this.speed = speed;
         this.direction = direction;
+        this.cascadeDelay = 300;
     }
     WeatherReport.prototype.updateInformationPanel = function () {
+        $("#cityPara").hide();
+        $("#tempPara").hide();
+        $("#pressurePara").hide();
+        $("#humidityPara").hide();
+        $("#windSpeedPara").hide();
+        $("#windDirectionPara").hide();
         $("#cityPara").text("City: " + this.city);
         $("#tempPara").text("Temperature: " + this.temp + " C");
         $("#pressurePara").text("Pressure: " + this.pressure + " mb");
         $("#humidityPara").text("Humidity: " + this.humidity);
         $("#windSpeedPara").text("Windspeed: " + this.speed + "km/h");
         $("#windDirectionPara").text("Wind direction: " + this.direction);
+        $("#cityPara").fadeIn();
+        $("#tempPara").delay(this.cascadeDelay).fadeIn();
+        $("#pressurePara").delay(this.cascadeDelay * 2).fadeIn();
+        $("#humidityPara").delay(this.cascadeDelay * 3).fadeIn();
+        $("#windSpeedPara").delay(this.cascadeDelay * 4).fadeIn();
+        $("#windDirectionPara").delay(this.cascadeDelay * 5).fadeIn();
     };
     return WeatherReport;
 }());
