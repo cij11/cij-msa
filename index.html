@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Local Meteorological Data</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,13 +12,24 @@
 </head>
 <body>
 
+        <!-- Include a facebook share button -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+   fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Bootstrap columns for document layout -->
 <div class="container-fluid">
-  <h1>Hello World!</h1>
-  <p>Resize the browser window to see the effect.</p>
+  <h1>Local Meteorological Data</h1>
   <div class="row">
     <div class="col-sm-4" style="background-color:lavender;">
-        <h1 id="heading1">Hello, world!</h1>
+        <h1 id="heading1">Click to refresh readings</h1>
         <button type="button" id="button1">Update Weathervane</button>
+        <div class="fb-share-button" data-href="https://cij-mas.azurewebsites.net" data-layout="box_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcij-mas.azurewebsites.net%2F&amp;src=sdkpreparse">Share</a></div>
     </div>
     
     <div class="col-sm-8" style="background-color:lavenderblush;">
