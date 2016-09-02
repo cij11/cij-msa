@@ -13,6 +13,11 @@
       color: white;
       padding: 15px;
     }
+
+    /*Enlarge the text of the meteorolgical reading outputs */
+    .reading{
+      font-size : 150%;
+    }
     
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
