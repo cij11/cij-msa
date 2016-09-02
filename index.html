@@ -9,6 +9,34 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
+
+    <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+
 </head>
 <body>
 
@@ -25,13 +53,13 @@
 <!-- Bootstrap columns for document layout -->
 <div class="container-fluid">
   <h1>Local Meteorological Data</h1>
-  <div class="row">
-    <div class="col-sm-4" style="background-color:lavender;">
+  <div class="row content">
+    <div class="col-sm-4 sidenav">
         <h2 id="heading1">Click to refresh readings</h2>
         <button type="button" class="btn btn-primary" id="button1">Update Weathervane</button>
     </div>
     
-    <div class="col-sm-8" style="background-color:lavenderblush;">
+    <div class="col-sm-8">
       <h2>Information Panel</h2>
       <p id="cityPara"></span>City</p>
       <p id="tempPara">Temp</p>
@@ -40,15 +68,12 @@
       <p id="windSpeedPara">Wind speed</p>
       <p id="windDirectionPara">Wind direction</p>     
     </div>
-
-    <div class="row">
-      <div class="col-sm-4" style="background-color:lavender;">
-          <div class="fb-share-button" data-href="https://cij-mas.azurewebsites.net" data-layout="box_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcij-mas.azurewebsites.net%2F&amp;src=sdkpreparse">Share</a></div>
-      </div>
-    </div>
-
   </div>
 </div>
+
+<footer class="container-fluid">
+    <div class="fb-share-button" data-href="https://cij-mas.azurewebsites.net" data-layout="box_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcij-mas.azurewebsites.net%2F&amp;src=sdkpreparse">Share</a></div>
+</footer>
 
   <script type="text/javascript" src="main.js" ></script>
   </body>
