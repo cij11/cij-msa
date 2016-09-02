@@ -1,64 +1,37 @@
 var textInput;
-var Greeter = (function () {
-    function Greeter(greeting) {
-        this.greeting = greeting;
+var WeatherReport = (function () {
+    function WeatherReport(city, temp, pressure, humidity, speed, direction) {
+        this.city = city;
+        this.temp = temp;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.speed = speed;
+        this.direction = direction;
     }
-    Greeter.prototype.greet = function () {
-        return this.greeting;
+    WeatherReport.prototype.updateInformationPanel = function () {
+        $("#cityPara").text("City: " + this.city);
+        $("#tempPara").text("Temperature: " + this.temp + " C");
+        $("#pressurePara").text("Pressure: " + this.pressure + " mb");
+        $("#humidityPara").text("Humidity: " + this.humidity);
+        $("#windSpeedPara").text("Windspeed: " + this.speed + "km/h");
+        $("#windDirectionPara").text("Wind direction: " + this.direction);
     };
-    return Greeter;
+    return WeatherReport;
 }());
-;
-var greeter = new Greeter("Hello, user! Using typescript and jquery");
-$("#heading1").text(greeter.greet());
 $("#button1").on("click", function () {
-    sendAjaxRequest1();
-});
-$("#button2").on("click", function () {
-    sendAjaxRequest2();
-});
-$("#button3").on("click", function () {
-    sendAjaxRequest3();
-});
-$("#button4").on("click", function () {
-    sendAjaxWeatherRequestByCity(textInput);
-});
-$("#button5").on("click", function () {
     sendAjaxWeatherRequestIP();
 });
-function sendAjaxRequest1() {
-    $.getJSON("http://api.fixer.io/latest", function (data) {
-        var NZrate;
-        NZrate = data.rates.NZD;
-        alert(NZrate);
-    });
-}
-function sendAjaxRequest2() {
-    $.getJSON("http://api.fixer.io/latest", function (data) {
-        var USrate;
-        USrate = data.rates.USD;
-        alert(USrate);
-    });
-}
-function sendAjaxRequest3() {
-    $.ajax({
-        dataType: "json",
-        url: "http://api.fixer.io/latest",
-        success: function (data) {
-            var AUrate;
-            AUrate = data.rates.AUD;
-            alert(AUrate);
-        }
-    });
-}
+$("#button2").on("click", function () {
+    sendAjaxWeatherRequestByCity(textInput);
+});
 function sendAjaxWeatherRequest() {
     $.ajax({
         url: "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/conditions/q/NZ/Christchurch.json",
         dataType: "jsonp",
         success: function (parsed_json) {
             var location = parsed_json['location']['city'];
-            var temp_f = parsed_json['current_observation']['temp_f'];
-            alert("Current temperature in " + location + " is: " + temp_f);
+            var temp_c = parsed_json['current_observation']['temp_c'];
+            alert("Current temperature in " + location + " is: " + temp_c);
         }
     });
 }
@@ -68,8 +41,8 @@ function sendAjaxWeatherRequestByCity(city) {
         dataType: "jsonp",
         success: function (parsed_json) {
             var location = parsed_json['location']['city'];
-            var temp_f = parsed_json['current_observation']['temp_f'];
-            alert("Current temperature in " + location + " is: " + temp_f);
+            var temp_c = parsed_json['current_observation']['temp_c'];
+            alert("Current temperature in " + location + " is: " + temp_c);
         }
     });
 }
@@ -78,20 +51,14 @@ function sendAjaxWeatherRequestByCountryCity(country, city) {
         url: "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/conditions/q/" + country + "/" + city + ".json",
         dataType: "jsonp",
         success: function (parsed_json) {
-            var location = parsed_json['location']['city'];
-            var temp_f = parsed_json['current_observation']['temp_f'];
-            alert("Current temperature in " + location + " is: " + temp_f);
-        }
-    });
-}
-function sendAjaxWeatherRequestLatLong() {
-    $.ajax({
-        url: "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/q/37.776289,-122.395234.json",
-        dataType: "jsonp",
-        success: function (parsed_json) {
-            var location = parsed_json['location']['city'];
-            var temp_f = parsed_json['current_observation']['temp_f'];
-            alert("Current temperature in " + location + " is: " + temp_f);
+            var temp_c = parsed_json['current_observation']['temp_c'];
+            var pressure_mb = parsed_json['current_observation']['pressure_mb'];
+            var humidity_percent = parsed_json['current_observation']['relative_humidity'];
+            var windspeed_kph = parsed_json['current_observation']['wind_kph'];
+            var wind_direction = parsed_json['current_observation']['wind_dir'];
+            var weatherReport = new WeatherReport(city, temp_c, pressure_mb, humidity_percent, windspeed_kph, wind_direction);
+            weatherReport.updateInformationPanel();
+            // alert("Current temperature in " + country + " is: " + temp_c);
         }
     });
 }
@@ -106,15 +73,4 @@ function sendAjaxWeatherRequestIP() {
             sendAjaxWeatherRequestByCountryCity(countryString, cityString);
         }
     });
-}
-/*function sendAjaxRequest() {
-    alert("Ajax sending...");
-$.getJSON( "http://api.open-notify.org/iss-now.json", function( data ) {
-  alert("Ajax iss get succeeded");
-});
-}*/
-//  $("#demo").text("Button clicked");
-function othername() {
-    textInput = document.getElementById("userInput").value;
-    sendAjaxWeatherRequestByCity(textInput);
 }
