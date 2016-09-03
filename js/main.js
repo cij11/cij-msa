@@ -3,8 +3,10 @@ var textInput;
 $(document).ready(function () {
     //Get initial meteorological report
     sendAjaxWeatherRequestIP();
-    //Initialise tooltips
-    $.protip();
+    //Initialise tipr tooltips - one of the two advanced jquery plugins.
+    $('.tip').tipr({
+        'mode': 'right'
+    });
 });
 //Displays data with a cascading fade in.
 var WeatherReport = (function () {
@@ -41,6 +43,7 @@ function startLoading() {
     $("#humidityPara").hide();
     $("#windSpeedPara").hide();
     $("#windDirectionPara").hide();
+    //Display the loading spinner while loading, another jquery plugin.
     $('.spin').spin('show');
 }
 //Disable loading spinner
@@ -84,5 +87,3 @@ function sendAjaxWeatherRequestByCountryCity(country, city) {
         }
     });
 }
-$(document).ready(function () {
-});

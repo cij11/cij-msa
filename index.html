@@ -9,13 +9,15 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link href="css/jquery.spin.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="//min.gitcdn.xyz/repo/DoclerLabs/Protip/master/protip.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
   <script src="js/jquery.spin.js" type="text/javascript"></script>
-  <script src="//min.gitcdn.xyz/repo/DoclerLabs/Protip/master/protip.min.js"></script>
+
+  <link href="tipr/tipr.css" rel="stylesheet">
+  <script src="tipr/tipr.min.js"></script>
+
 </head>
 
 <body>
@@ -41,12 +43,12 @@
     
     <div class="col-sm-8">
       <h2>Information Panel</h2>
-      <p class="reading protip" title="Your current City, from your IP address"" id="cityPara"></span>City</p>
-      <p class="reading protip" title="The current temperature, in degrees Celcius" id="tempPara">Temp</p>
-      <p class="reading protip" title="Pressure in millibars" id="pressurePara">Pressure</p>
-      <p class="reading protip" title="Humidity in percent" id="humidityPara">Humidity</p>
-      <p class="reading protip" title="Windspeed in km/h" id="windSpeedPara">Wind speed</p>
-      <p class="reading protip" title="Wind direction in compass coordinates" id="windDirectionPara">Wind direction</p>  
+      <p class="reading tip" data-tip="Your current City, from your IP address"" id="cityPara"></span>City</p>
+      <p class="reading tip" data-tip="The current temperature, in degrees Celcius" id="tempPara">Temp</p>
+      <p class="reading tip" data-tip="Pressure in millibars" id="pressurePara">Pressure</p>
+      <p class="reading tip" data-tip="Humidity in percent" id="humidityPara">Humidity</p>
+      <p class="reading tip" data-tip="Windspeed in km/h" id="windSpeedPara">Wind speed</p>
+      <p class="reading tip" data-tip="Wind direction in compass coordinates" id="windDirectionPara">Wind direction</p>
       <div class="spin" data-spin />   
     </div>
   </div>
