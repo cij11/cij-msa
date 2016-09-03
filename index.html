@@ -36,19 +36,18 @@
 <div class="container-fluid">
   <h1>Local Meteorological Data</h1>
   <div class="row content">
-    <div class="col-sm-4 sidenav">
-        <h2 id="heading1">Click to refresh readings</h2>
-        <button type="button" class="btn btn-primary" id="button1">Update Weathervane</button>
+    <div class="col-sm-3 sidenav">
+        <button type="button" class="btn btn-primary tip" data-tip = "Click here to refresh readings" id="button1">Update</button>
     </div>
     
-    <div class="col-sm-8">
+    <div class="col-sm-9">
       <h2>Information Panel</h2>
-      <p class="reading tip" data-tip="Your current City, from your IP address"" id="cityPara"></span>City</p>
-      <p class="reading tip" data-tip="The current temperature, in degrees Celcius" id="tempPara">Temp</p>
-      <p class="reading tip" data-tip="Pressure in millibars" id="pressurePara">Pressure</p>
-      <p class="reading tip" data-tip="Humidity in percent" id="humidityPara">Humidity</p>
-      <p class="reading tip" data-tip="Windspeed in km/h" id="windSpeedPara">Wind speed</p>
-      <p class="reading tip" data-tip="Wind direction in compass coordinates" id="windDirectionPara">Wind direction</p>
+      <p class="reading" id="cityPara"></span>City</p>
+      <p class="reading" id="tempPara">Temp</p>
+      <p class="reading" id="pressurePara">Pressure</p>
+      <p class="reading" id="humidityPara">Humidity</p>
+      <p class="reading" id="windSpeedPara">Wind speed</p>
+      <p class="reading" id="windDirectionPara">Wind direction</p>
       <div class="spin" data-spin />   
     </div>
   </div>

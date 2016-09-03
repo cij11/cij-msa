@@ -26,6 +26,7 @@ var WeatherReport = (function () {
         $("#humidityPara").text("Humidity: " + this.humidity);
         $("#windSpeedPara").text("Windspeed: " + this.speed + "km/h");
         $("#windDirectionPara").text("Wind direction: " + this.direction);
+        
         $("#cityPara").fadeIn();
         $("#tempPara").delay(this.cascadeDelay).fadeIn();
         $("#pressurePara").delay(this.cascadeDelay * 2).fadeIn();
