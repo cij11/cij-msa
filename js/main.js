@@ -5,7 +5,7 @@ $(document).ready(function () {
     sendAjaxWeatherRequestIP();
     //Initialise tipr tooltips - one of the two advanced jquery plugins.
     $('.tip').tipr({
-        'mode': 'right'
+        'mode': 'top'
     });
 });
 //Displays data with a cascading fade in.

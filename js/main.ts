@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     //Initialise tipr tooltips - one of the two advanced jquery plugins.
     $('.tip').tipr({
-        'mode': 'right'
+        'mode': 'top'
     });
 });
 
