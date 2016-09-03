@@ -1,9 +1,15 @@
 var textInput : string;
 
+//Initialise scripts when page finished loading
 $(document).ready(function(){
+    //Get initial meteorological report
     sendAjaxWeatherRequestIP()
+
+    //Initialise tooltips
+    $.protip();
 });
 
+//Displays data with a cascading fade in.
 class WeatherReport{
     cascadeDelay : number;
 
@@ -27,6 +33,7 @@ class WeatherReport{
     }
 }
 
+//Disable data display, and enable loading spinner
 function startLoading(){
     $("#cityPara").hide();
     $("#tempPara").hide();
@@ -37,6 +44,7 @@ function startLoading(){
     $('.spin').spin('show');
 }
 
+//Disable loading spinner
 function stopLoading(){
     $('.spin').spin('hide');
 }
@@ -45,56 +53,11 @@ $("#button1").on("click", function(){
     sendAjaxWeatherRequestIP();
 });
 
-$("#button2").on("click", function(){
-    sendAjaxWeatherRequestByCity(textInput);
-});
+//Using the wunderground API via Ajax to demonstrate dynamic api calls.
 
-function sendAjaxWeatherRequest(){
-  $.ajax({
-  url : "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/conditions/q/NZ/Christchurch.json",
-  dataType : "jsonp",
-  success : function(parsed_json) {
-  var location = parsed_json['location']['city'];
-  var temp_c = parsed_json['current_observation']['temp_c'];
-  alert("Current temperature in " + location + " is: " + temp_c);
-  }
-  });
-}
-
-function sendAjaxWeatherRequestByCity(city : String){
-  $.ajax({
-  url : "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/conditions/q/NZ/" + city + ".json",
-  dataType : "jsonp",
-  success : function(parsed_json) {
-  var location = parsed_json['location']['city'];
-  var temp_c = parsed_json['current_observation']['temp_c'];
-  alert("Current temperature in " + location + " is: " + temp_c);
-  }
-  });
-}
-
-function sendAjaxWeatherRequestByCountryCity(country : String, city : String){
-  $.ajax({
-  url : "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/conditions/q/" + country + "/" + city + ".json",
-  dataType : "jsonp",
-  success : function(parsed_json) {
-
-  var temp_c = parsed_json['current_observation']['temp_c'];
-  var pressure_mb = parsed_json['current_observation']['pressure_mb'];
-  var humidity_percent = parsed_json['current_observation']['relative_humidity'];
-  var windspeed_kph = parsed_json['current_observation']['wind_kph'];
-  var wind_direction = parsed_json['current_observation']['wind_dir'];
-
-  var weatherReport = new WeatherReport(city, temp_c, pressure_mb, humidity_percent, windspeed_kph, wind_direction);
-  stopLoading();
-  weatherReport.updateInformationPanel();
-
- // alert("Current temperature in " + country + " is: " + temp_c);
-  }
-  });
-}
-
+//Use a geolocate call to get the country and city
 function sendAjaxWeatherRequestIP(){
+    //Display the loading spinner at the initiation of an API call.
     startLoading();
     $.ajax({
   url : "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/q/autoip.json",
@@ -108,3 +71,29 @@ function sendAjaxWeatherRequestIP(){
   }
   });
 }
+
+//Generate a WeatherReport from the country, city, and api call.
+function sendAjaxWeatherRequestByCountryCity(country : String, city : String){
+  $.ajax({
+  url : "http://api.wunderground.com/api/01f6c27699f54bb4/geolookup/conditions/q/" + country + "/" + city + ".json",
+  dataType : "jsonp",
+  success : function(parsed_json) {
+
+  var temp_c = parsed_json['current_observation']['temp_c'];
+  var pressure_mb = parsed_json['current_observation']['pressure_mb'];
+  var humidity_percent = parsed_json['current_observation']['relative_humidity'];
+  var windspeed_kph = parsed_json['current_observation']['wind_kph'];
+  var wind_direction = parsed_json['current_observation']['wind_dir'];
+
+  //Disable the loading spinner, and display the meteorological information.
+  var weatherReport = new WeatherReport(city, temp_c, pressure_mb, humidity_percent, windspeed_kph, wind_direction);
+  stopLoading();
+  weatherReport.updateInformationPanel();
+  }
+  });
+}
+
+
+$(document).ready(function(){
+    
+});
