@@ -40,20 +40,26 @@
         <button type="button" class="btn btn-primary tip" data-tip = "Click here to refresh readings" id="button1">Update</button>
     </div>
     
+    <!-- paragraphs to output data. Individually named
+    to load data seperately and allow cascading load effect -->
     <div class="col-sm-9">
-      <h2>Information Panel</h2>
+      <h2>Instrument Readings</h2>
+      <br>
       <p class="reading" id="cityPara"></span>City</p>
       <p class="reading" id="tempPara">Temp</p>
       <p class="reading" id="pressurePara">Pressure</p>
       <p class="reading" id="humidityPara">Humidity</p>
       <p class="reading" id="windSpeedPara">Wind speed</p>
       <p class="reading" id="windDirectionPara">Wind direction</p>
+      
+      <!-- Loading spinner - Second jquery plugin -->
       <div class="spin" data-spin />   
     </div>
   </div>
 </div>
 
 <footer class="container-fluid">
+  Current weather data provided courtesy of wunderground.com
   <div class="fb-share-button" data-href="https://cij-mas.azurewebsites.net" data-layout="box_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcij-mas.azurewebsites.net%2F&amp;src=sdkpreparse">Share</a></div>
 </footer>
 
